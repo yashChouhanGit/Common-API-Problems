@@ -1,0 +1,12 @@
+Question 1. 
+
+On January 10, 2025, I faced an issue where an API was not working on the iOS side but was functioning perfectly on the Android side. I checked the API requests and headers on both ends, and they were identical.
+The API is used to add attachments along with some content. On the iOS side, the API successfully creates the content, but when I try to add attachments to the created or modified content, the attachment IDs are not being sent in the push request.
+On the other hand, the same functionality works perfectly on the Android side. Additionally, if the content is created on the Android side, I am able to modify it and add new attachments from the iOS side without any issues.
+
+
+Answer 
+
+The solution to this problem was that I missed sending one parameter from the iOS side, which contained the comment information for the content. As a result, the server returned an error.
+On the other hand, the Android side was sending this parameter correctly. This explains why the API worked perfectly on Android but not on iOS.
+Additionally, if I updated the same content that had already been created and updated by Android (which included the comment key in the API request), the iOS side worked fine as well. The issue occurred only when I initially created the content from the iOS side without sending the comment key. This missing parameter caused the error.
